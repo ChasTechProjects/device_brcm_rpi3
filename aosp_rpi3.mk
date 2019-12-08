@@ -7,6 +7,9 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := Raspberry Pi 3
 PRODUCT_MANUFACTURER := brcm
 
+# Inherit some common AOSP stuff.
+$(call inherit-product, vendor/aosp/config/common_full_tablet_wifionly.mk)
+
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -15,10 +18,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=213 \
     ro.config.low_ram=true \
     wifi.interface=wlan0
-
-# application packages
-PRODUCT_PACKAGES += \
-    RpLauncher
 
 # system packages
 PRODUCT_PACKAGES += \
@@ -78,8 +77,3 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
     frameworks/base/data/sounds/effects/ogg/Effect_Tick_48k.ogg:system/media/audio/ui/Effect_Tick.ogg \
     $(PRODUCT_COPY_FILES)
-
-DEVICE_PACKAGE_OVERLAYS := device/brcm/rpi3/overlay
-PRODUCT_AAPT_PREF_CONFIG := tvdpi
-PRODUCT_CHARACTERISTICS := tv
-PRODUCT_LOCALES := en_US,ko_KR,ja_JP,zh_CN,hi_IN,en_GB,de_DE,fr_FR,it_IT,ru_RU,es_ES,pt_PT,nl_BE,nl_NL
